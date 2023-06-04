@@ -3,11 +3,13 @@ package com.luan.servemanagement.service.implementation;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Collection;
+import java.util.Random;
 
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.luan.servemanagement.model.Server;
 import com.luan.servemanagement.repository.ServerRepository;
@@ -69,7 +71,9 @@ public class ServerServiceImplementation implements ServerService {
 
 
 	private String setServerImgUrl() {
-		return null;
+		String [] imageNames = { "server1.png", "server2.png", "server3.png", "server4.png", };
+		return ServletUriComponentsBuilder.fromCurrentContextPath()
+				.path("/server/image/" + imageNames[new Random().nextInt(4)]).toUriString();
 	}
 	
 }
