@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.luan.servemanagement.model.Server;
@@ -43,26 +44,27 @@ public class ServerServiceImplementation implements ServerService {
 
 	@Override
 	public Collection<Server> list(int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Fetching all servers");
+		return serverRepository.findAll(PageRequest.of(0, limit)).toList();
 	}
 
 	@Override
 	public Server get(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Fetching server by id: {}", id);
+		return serverRepository.findById(id).get();
 	}
 
 	@Override
 	public Server update(Server server) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Updating Server: {}", server.getName());
+		return serverRepository.save(server);
 	}
 
 	@Override
 	public Boolean delete(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("Deleting server by: {}", id);
+		serverRepository.deleteById(id);
+		return Boolean.TRUE;
 	}
 
 
